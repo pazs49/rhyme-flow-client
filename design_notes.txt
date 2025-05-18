@@ -1,0 +1,5 @@
+text = white
+h1 special text = green 600
+button primary = green 600, hover green 700
+moving card = bg-gradient-to-b from-gray-900 to-gray-800
+body bg = bg-gradient-to-b from-black to-gray-700
