@@ -1,3 +1,6 @@
+import { login } from "../api/auth";
+import { useMutation } from "@tanstack/react-query";
+
 import React from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,6 +17,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card, CardTitle } from "./ui/card";
+import { useNavigate } from "react-router";
+
+import { toast } from "sonner";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address").min(2).max(50),
@@ -21,6 +27,21 @@ const formSchema = z.object({
 });
 
 const LoginForm = ({ setIsLoginForm }) => {
+  const mutation = useMutation({
+    mutationFn: login,
+    onSuccess: (data) => {
+      toast.success("Login successful!");
+      console.log(data);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("refresh_token", data.refresh_token);
+      navigate("/dashboard");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const navigate = useNavigate();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -75,7 +96,12 @@ const LoginForm = ({ setIsLoginForm }) => {
               </FormItem>
             )}
           />
-          <Button className="-mt-2" variant="primary" type="submit">
+          <Button
+            className="-mt-2"
+            variant="primary"
+            type="submit"
+            onClick={() => mutation.mutate(form.getValues())}
+          >
             Submit
           </Button>
         </form>

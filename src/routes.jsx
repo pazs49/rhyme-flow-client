@@ -1,5 +1,6 @@
 import LandingPage from "./pages/LandingPage";
-import SidebarDemo from "./components/sidebar-demo-2";
+import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import { createBrowserRouter, RouterProvider } from "react-router";
 
@@ -7,7 +8,14 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <LandingPage />,
-    // element: <SidebarDemo />,
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
   },
 ]);
 

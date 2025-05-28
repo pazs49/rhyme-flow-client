@@ -14,6 +14,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card, CardTitle } from "./ui/card";
+import { toast } from "sonner";
+import { signup } from "@/api/auth";
+import { useMutation } from "@tanstack/react-query";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address").min(2).max(50),
@@ -22,6 +25,19 @@ const formSchema = z.object({
 });
 
 const SignupForm = ({ setIsLoginForm }) => {
+  const mutation = useMutation({
+    mutationFn: () => signup(form.getValues()),
+    onMutate: () => {},
+    onSuccess: (data) => {
+      toast.success("Signup successful!");
+      console.log(data);
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+    onSettled: () => {},
+  });
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -32,6 +48,10 @@ const SignupForm = ({ setIsLoginForm }) => {
   });
 
   const onSubmit = (values) => {
+    if (values.password !== values.confirmPassword) {
+      return toast.error("Passwords do not match");
+    }
+    mutation.mutate();
     console.log("Submitted values:", values);
   };
 

@@ -1,13 +1,34 @@
-import { useLocation } from "react-router";
+import { getInfo } from "@/api/auth";
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router";
+import useCurrentUserInfo from "@/stores/currentUserInfo";
+import Loading from "./Loading";
 
 const ProtectedRoute = ({ children }) => {
-  // const token = localStorage.getItem("token");
-  // const location = useLocation();
+  const { setActiveUser } = useCurrentUserInfo();
+  const navigate = useNavigate();
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["info"],
+    queryFn: async () => {
+      const userInfo = await getInfo(localStorage.getItem("token"));
+      console.log("userinfo", userInfo);
+      setActiveUser(userInfo);
+      return userInfo;
+    },
+    refetchOnWindowFocus: false,
+    retry: false,
+    staleTime: Infinity,
+  });
 
-  if (true) {
+  if (isLoading) return <Loading />;
+  if (isError) {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refresh_token");
+    navigate("/");
+  }
+  console.log("query data", data);
+  if (data) {
     return children;
   }
-
-  return <div>ProtectedRoute</div>;
 };
 export default ProtectedRoute;
