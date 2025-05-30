@@ -31,7 +31,7 @@ const LoginForm = ({ setIsLoginForm }) => {
     mutationFn: login,
     onSuccess: (data) => {
       toast.success("Login successful!");
-      console.log(data);
+      // console.log(data);
       localStorage.setItem("token", data.token);
       localStorage.setItem("refresh_token", data.refresh_token);
       navigate("/dashboard");
@@ -50,8 +50,8 @@ const LoginForm = ({ setIsLoginForm }) => {
     },
   });
 
-  const onSubmit = (values) => {
-    console.log("Submitted values:", values);
+  const onSubmit = () => {
+    mutation.mutate(form.getValues());
   };
 
   return (
@@ -96,12 +96,7 @@ const LoginForm = ({ setIsLoginForm }) => {
               </FormItem>
             )}
           />
-          <Button
-            className="-mt-2"
-            variant="primary"
-            type="submit"
-            onClick={() => mutation.mutate(form.getValues())}
-          >
+          <Button className="-mt-2" variant="primary" type="submit">
             Submit
           </Button>
         </form>

@@ -102,16 +102,16 @@ export default function LyricCreate() {
   const handleFormSubmit = (data) => {
     if (data.genre === "Other") data.genre = customGenre;
     if (data.mood === "Other") data.mood = customMood;
-    console.log(data);
+    console.log("handleFormGenerateLyric:", data);
     mutation.mutate({ lyricInfo: data });
   };
 
   return (
     <div>
-      <section className="lg:w-1/2 lg:mx-auto">
+      <section className="lg:w-1/2 lg:mx-auto ">
         <form
           onSubmit={handleSubmit(handleFormSubmit)}
-          className="space-y-6 min-w-lg mx-auto"
+          className="space-y-6  mx-auto"
         >
           {/* Title */}
           <div className="space-y-2">
@@ -235,7 +235,7 @@ export default function LyricCreate() {
       <Separator className="my-8" />
 
       {hasLyric && (
-        <section className="flex flex-col gap-3 mx-auto w-1/2">
+        <section className="flex flex-col gap-3 mx-auto w-1/2 max-sm:w-full sm:w-full lg:w-1/2">
           <h1 className="text-2xl font-bold">{lyricInfo.title}</h1>
           <div className="flex gap-2">
             <Badge className={"bg-green-600"}>{lyricInfo.genre}</Badge>

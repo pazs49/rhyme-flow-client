@@ -40,7 +40,7 @@ export const getAllLyrics = async () => {
   );
 
   const data = await response.json();
-  console.log("lyrics of all users:", data);
+  // console.log("lyrics of all users:", data);
   if (!response.ok) {
     const description =
       data.error_description?.[0] || data.error || "Failed to fetch lyrics";
@@ -64,7 +64,108 @@ export const getAllUserLyrics = async () => {
   );
 
   const data = await response.json();
-  console.log("lyrics of current user:", data);
+  // console.log("lyrics of current user:", data);
+  if (!response.ok) {
+    const description =
+      data.error_description?.[0] || data.error || "Failed to create lyric";
+
+    throw new Error(description);
+  }
+
+  return data;
+};
+
+export const trashLyric = async (lyricId) => {
+  // console.log("lyricId", lyricId);
+  const response = await fetch(
+    import.meta.env.VITE_API_BASE_URL + `/api/v1/lyrics/trash`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({ id: lyricId }),
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    const description =
+      data.error_description?.[0] || data.error || "Failed to trash lyric";
+
+    throw new Error(description);
+  }
+
+  return data;
+};
+
+export const deleteLyric = async (lyricId) => {
+  const response = await fetch(
+    import.meta.env.VITE_API_BASE_URL + `/api/v1/lyrics/${lyricId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    const description =
+      data.error_description?.[0] || data.error || "Failed to delete lyric";
+
+    throw new Error(description);
+  }
+
+  return data;
+};
+
+export const getTrashedLyrics = async () => {
+  const response = await fetch(
+    import.meta.env.VITE_API_BASE_URL + "/api/v1/lyrics/get_trashed_lyrics",
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    const description =
+      data.error_description?.[0] ||
+      data.error ||
+      "Failed to fetch trashed lyrics";
+
+    throw new Error(description);
+  }
+
+  return data;
+};
+
+export const submitEditLyric = async ({ lyricId, lyric }) => {
+  const response = await fetch(
+    import.meta.env.VITE_API_BASE_URL + `/api/v1/lyrics/${lyricId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({ lyric }),
+    }
+  );
+
+  const data = await response.json();
+
   if (!response.ok) {
     const description =
       data.error_description?.[0] || data.error || "Failed to create lyric";
@@ -100,8 +201,8 @@ export const likeLyric = async ({ lyricId }) => {
 };
 
 export const commentOnLyric = async ({ lyricId, comment }) => {
-  console.log("lyricId", lyricId);
-  console.log("commentBody", comment);
+  // console.log("lyricId", lyricId);
+  // console.log("commentBody", comment);
   const response = await fetch(
     import.meta.env.VITE_API_BASE_URL + `/api/v1/lyrics/${lyricId}/comments`,
     {

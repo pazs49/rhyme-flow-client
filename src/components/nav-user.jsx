@@ -23,9 +23,14 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { logout } from "@/api/auth";
+import { useNavigate } from "react-router";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function NavUser({ user }) {
+  const queryClient = useQueryClient();
   const { isMobile } = useSidebar();
+  const navigate = useNavigate();
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -33,10 +38,9 @@ export function NavUser({ user }) {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground md:h-8 md:p-0"
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground md:h-8 md:p-0 "
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                {/* <AvatarImage src={user.avatar} alt={user.name} /> */}
                 <AvatarFallback className="rounded-lg">
                   {user.email[0].toUpperCase()}
                 </AvatarFallback>
@@ -68,7 +72,15 @@ export function NavUser({ user }) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
 
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                queryClient.invalidateQueries();
+                navigate("/");
+                logout();
+                window.location.reload();
+              }}
+              className="flex items-center gap-2"
+            >
               <LogOut />
               Log out
             </DropdownMenuItem>

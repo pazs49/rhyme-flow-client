@@ -28,14 +28,17 @@ const SignupForm = ({ setIsLoginForm }) => {
   const mutation = useMutation({
     mutationFn: () => signup(form.getValues()),
     onMutate: () => {},
-    onSuccess: (data) => {
-      toast.success("Signup successful!");
-      console.log(data);
+    onSuccess: () => {
+      toast.success("Signup successful! Please login.");
+      setIsLoginForm(true);
+      // console.log(data);
     },
     onError: (error) => {
       toast.error(error.message);
     },
-    onSettled: () => {},
+    onSettled: () => {
+      form.reset();
+    },
   });
 
   const form = useForm({

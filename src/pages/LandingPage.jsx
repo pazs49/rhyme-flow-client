@@ -10,23 +10,31 @@ import landingPageMovingCardsData from "@/data/landingPageMovingCardsData";
 
 import { useState } from "react";
 
-import { useQuery } from "@tanstack/react-query";
-import { getInfo } from "@/api/auth";
 import { useNavigate } from "react-router";
+import { getInfo } from "@/api/auth";
+import { useQuery } from "@tanstack/react-query";
 import Loading from "@/components/Loading";
 
 const LandingPage = () => {
-  const { isSuccess, isLoading } = useQuery({
-    queryKey: ["goToDashboardWhenLoggedIn"],
-    queryFn: getInfo,
-  });
   const navigate = useNavigate();
+  const { data, isLoading, isError, isSuccess } = useQuery({
+    queryKey: ["info"],
+    queryFn: async () => {
+      console.log("triggered");
+      return await getInfo(localStorage.getItem("token"));
+    },
+
+    enabled: !!localStorage.getItem("token"),
+  });
   const [isLoginForm, setIsLoginForm] = useState(true);
 
   if (isLoading) return <Loading />;
-
   if (isSuccess) {
     navigate("/dashboard");
+  }
+  if (isError) {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refresh_token");
   }
 
   return (

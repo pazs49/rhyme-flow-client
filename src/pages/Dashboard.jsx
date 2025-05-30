@@ -16,13 +16,19 @@ import {
 import LyricCreate from "@/components/LyricCreate";
 import Creations from "@/components/Creations";
 import Feed from "@/components/Feed";
-
-import { useState } from "react";
+import Trash from "@/components/Trash";
 
 import useCurrentActiveMenu from "@/stores/currentActiveMenu";
+import { useEffect } from "react";
 
 export default function Dashboard() {
-  const { currentActiveMenu } = useCurrentActiveMenu();
+  const { currentActiveMenu, setActiveMenu } = useCurrentActiveMenu();
+
+  useEffect(() => {
+    return () => {
+      setActiveMenu("Feed");
+    };
+  }, [setActiveMenu]);
 
   return (
     <SidebarProvider
@@ -40,6 +46,7 @@ export default function Dashboard() {
           {currentActiveMenu === "Create" && <LyricCreate />}
           {currentActiveMenu === "Creations" && <Creations />}
           {currentActiveMenu === "Feed" && <Feed />}
+          {currentActiveMenu === "Trash" && <Trash />}
         </div>
       </SidebarInset>
     </SidebarProvider>

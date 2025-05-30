@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllLyrics } from "@/api/lyric";
+import { getTrashedLyrics } from "@/api/lyric";
 import LyricCard from "./LyricCard";
 
-const Feed = () => {
+const Trash = () => {
   const {
     data: lyrics,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["AllCreations"],
-    queryFn: getAllLyrics,
+    queryKey: ["TrashCreations"],
+    queryFn: getTrashedLyrics,
     refetchOnWindowFocus: false,
     retry: false,
     staleTime: Infinity,
@@ -38,4 +38,4 @@ const Feed = () => {
     </div>
   );
 };
-export default Feed;
+export default Trash;

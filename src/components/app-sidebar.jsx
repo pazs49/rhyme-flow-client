@@ -15,6 +15,13 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+
+import { Separator } from "./ui/separator";
 
 import useCurrentActiveMenu from "@/stores/currentActiveMenu";
 import useCurrentUserInfo from "@/stores/currentUserInfo";
@@ -78,19 +85,64 @@ export function AppSidebar(props) {
         className="!w-[calc(var(--sidebar-width-icon)_+_1px)] border-r"
       >
         <SidebarHeader>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                size="lg"
-                asChild
-                className="md:h-8 md:p-0 pointer-events-none"
-              >
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <img src="/logo.png" className="h-8" alt="" />
-                </div>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
+          <HoverCard>
+            <HoverCardTrigger>
+              <SidebarMenu>
+                <SidebarMenuItem>
+                  <SidebarMenuButton
+                    size="lg"
+                    asChild
+                    className="md:h-8 md:p-0 pointer-events-none"
+                  >
+                    <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                      <img src="/logo.png" className="h-8" alt="" />
+                    </div>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </HoverCardTrigger>
+            <HoverCardContent className={"bg-gray-500 text-white"} side="right">
+              <div className="flex flex-col">
+                <p class="text-sm">This app was built by:</p>
+                <a
+                  className="underline"
+                  href="https://www.linkedin.com/in/allanelgar/"
+                  target="_blank"
+                >
+                  Allan Elgar
+                </a>
+                <a
+                  className="underline"
+                  href="https://www.linkedin.com/in/erwin-macahilo-3a7795248/"
+                  target="_blank"
+                >
+                  Erwin Macahilo
+                </a>
+                <a
+                  className="underline"
+                  href="https://www.linkedin.com/in/percival-salvador-938756246/"
+                  target="_blank"
+                >
+                  Percival Salvador
+                </a>
+                <Separator className="bg-white my-2" />
+                <a
+                  className="text-sm underline"
+                  href="https://github.com/pazs49/rhyme-flow-client"
+                  target="_blank"
+                >
+                  Frontend: React{" "}
+                </a>
+                <a
+                  href="https://github.com/pazs49/rhyme-flow"
+                  target="_blank"
+                  className="text-sm underline"
+                >
+                  Backend: Ruby on Rails
+                </a>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
         </SidebarHeader>
         <SidebarContent>
           <SidebarGroup>

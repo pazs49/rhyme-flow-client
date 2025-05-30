@@ -7,3 +7,20 @@ body bg = bg-gradient-to-b from-black to-gray-700
 ##
 
 Add a shadow effect on hover on lyricCard
+Edit the generated lyric
+Delete
+
+##
+
+1.As a User, I want to create an account to use the app.
+2.As a User, I want to log in my credentials to start using the app.
+3.As a User, I want to prompt the app to generate original song lyrics.
+4.As a User, I can save the lyrics generated.
+5.As a User, I can view the lyrics I have generated.
+6.As a User, I can mark the lyrics saved to be private or public.
+7.As a User, I can view all the lyrics that were marked as public.
+8.As a User, I can like and comment on the lyrics by other users.
+9.As a User, I can edit the body of the lyrics generated.
+10.As a User, I can copy the lyrics generated.
+11.As a User, I can delete the lyrics generated.
+12.As a User, I can mark and unmarked "trash" the lyrics generated.

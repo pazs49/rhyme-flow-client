@@ -11,7 +11,6 @@ const ProtectedRoute = ({ children }) => {
     queryKey: ["info"],
     queryFn: async () => {
       const userInfo = await getInfo(localStorage.getItem("token"));
-      console.log("userinfo", userInfo);
       setActiveUser(userInfo);
       return userInfo;
     },
@@ -26,7 +25,7 @@ const ProtectedRoute = ({ children }) => {
     localStorage.removeItem("refresh_token");
     navigate("/");
   }
-  console.log("query data", data);
+  // console.log("query data", data);
   if (data) {
     return children;
   }
