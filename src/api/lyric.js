@@ -27,9 +27,10 @@ export const createLyric = async ({ lyricInfo }) => {
   return data;
 };
 
-export const getAllLyrics = async () => {
+export const getAllLyrics = async (page = 1, perPage = 10) => {
   const response = await fetch(
-    import.meta.env.VITE_API_BASE_URL + "/api/v1/lyrics",
+    import.meta.env.VITE_API_BASE_URL +
+      `/api/v1/lyrics?page=${page}&per_page=${perPage}`,
     {
       method: "GET",
       headers: {
@@ -40,7 +41,7 @@ export const getAllLyrics = async () => {
   );
 
   const data = await response.json();
-  // console.log("lyrics of all users:", data);
+  console.log("lyrics of all users:", data);
   if (!response.ok) {
     const description =
       data.error_description?.[0] || data.error || "Failed to fetch lyrics";

@@ -370,7 +370,9 @@ const LyricCard = ({
               {comments?.map((comment) => (
                 <div key={comment.id} className="bg-gray-600 p-2 rounded-md">
                   <div className="flex gap-2 justify-between items-center">
-                    <div className="font-bold">{comment.user.email}</div>
+                    <div className="font-bold">
+                      {comment.user ? comment.user.email : "Unknown user"}
+                    </div>
                     <div className="text-xs">
                       {dayjs(comment.created_at).fromNow()}
                     </div>
