@@ -68,7 +68,7 @@ export default function LyricCreate() {
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries(["creations"]);
-      console.log("generated lyric", data);
+      // console.log("generated lyric", data);
       setLyricInfo(data);
       setHasLyric(true);
     },
@@ -102,7 +102,7 @@ export default function LyricCreate() {
   const handleFormSubmit = (data) => {
     if (data.genre === "Other") data.genre = customGenre;
     if (data.mood === "Other") data.mood = customMood;
-    console.log("handleFormGenerateLyric:", data);
+    // console.log("handleFormGenerateLyric:", data);
     mutation.mutate({ lyricInfo: data });
   };
 

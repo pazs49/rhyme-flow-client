@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 import ReactPaginate from "react-paginate";
 
 function Items({ currentItems }) {
-  console.log("currentItemns", currentItems);
+  // console.log("currentItemns", currentItems);
   return (
     <>
       {currentItems &&

@@ -103,7 +103,7 @@ export function AppSidebar(props) {
             </HoverCardTrigger>
             <HoverCardContent className={"bg-gray-500 text-white"} side="right">
               <div className="flex flex-col">
-                <p class="text-sm">This app was built by:</p>
+                <p className="text-sm">This app was built by:</p>
                 <a
                   className="underline"
                   href="https://www.linkedin.com/in/allanelgar/"

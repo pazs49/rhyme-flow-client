@@ -93,7 +93,7 @@ const LyricCard = ({
   });
   const likeLyricMutation = useMutation({
     mutationFn: async (lyricId) => {
-      console.log(lyricId);
+      // console.log(lyricId);
       await likeLyric(lyricId);
     },
     onMutate: () => {},
@@ -218,7 +218,7 @@ const LyricCard = ({
                   onClick={(e) => {
                     e.stopPropagation();
                     likeLyricMutation.mutate({ lyricId });
-                    console.log("like");
+                    // console.log("like");
                   }}
                   variant={"primary"}
                   className={`flex ${

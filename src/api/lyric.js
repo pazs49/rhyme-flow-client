@@ -11,7 +11,7 @@ export const createLyric = async ({ lyricInfo }) => {
     }
   );
 
-  console.log(JSON.stringify({ lyric: lyricInfo }));
+  // console.log(JSON.stringify({ lyric: lyricInfo }));
 
   const data = await response.json();
 
@@ -41,7 +41,7 @@ export const getAllLyrics = async (page = 1, perPage = 10) => {
   );
 
   const data = await response.json();
-  console.log("lyrics of all users:", data);
+  // console.log("lyrics of all users:", data);
   if (!response.ok) {
     const description =
       data.error_description?.[0] || data.error || "Failed to fetch lyrics";

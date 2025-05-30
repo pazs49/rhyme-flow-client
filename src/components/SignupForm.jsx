@@ -55,7 +55,7 @@ const SignupForm = ({ setIsLoginForm }) => {
       return toast.error("Passwords do not match");
     }
     mutation.mutate();
-    console.log("Submitted values:", values);
+    // console.log("Submitted values:", values);
   };
 
   return (
