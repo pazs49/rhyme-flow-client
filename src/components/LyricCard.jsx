@@ -317,7 +317,7 @@ const LyricCard = ({
                         id="public"
                         checked={isPublic}
                         onCheckedChange={() => {
-                          console.log("click");
+                          // console.log("click");
                           setIsPublic(!isPublic);
                         }}
                       />

@@ -3,11 +3,13 @@ import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import { createBrowserRouter, RouterProvider } from "react-router";
+import { Error } from "./pages/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <LandingPage />,
+    errorElement: <Error />,
   },
   {
     path: "/dashboard",
@@ -16,6 +18,7 @@ const router = createBrowserRouter([
         <Dashboard />
       </ProtectedRoute>
     ),
+    errorElement: <Error />,
   },
 ]);
 

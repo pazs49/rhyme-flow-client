@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,6 +24,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createLyric } from "@/api/lyric";
 
 import { toast } from "sonner";
+import { debounce } from "lodash";
 // import { rubyHashToJson } from "@/lib/helper";
 
 const genreOptions = [
@@ -100,9 +101,12 @@ export default function LyricCreate() {
   const selectedMood = watch("mood") || "";
 
   const handleFormSubmit = (data) => {
+    if (isLoading) {
+      toast.error("Please wait...");
+      return;
+    }
     if (data.genre === "Other") data.genre = customGenre;
     if (data.mood === "Other") data.mood = customMood;
-    // console.log("handleFormGenerateLyric:", data);
     mutation.mutate({ lyricInfo: data });
   };
 

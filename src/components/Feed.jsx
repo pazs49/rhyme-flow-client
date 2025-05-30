@@ -49,7 +49,7 @@ const Feed = () => {
 
   const handlePageClick = (event) => {
     setCurrentPage(event.selected + 1);
-    console.log("new page ", event.selected + 1);
+    // console.log("new page ", event.selected + 1);
   };
 
   if (isLoading) return "Loading...";

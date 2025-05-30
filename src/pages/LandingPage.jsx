@@ -31,6 +31,7 @@ const LandingPage = () => {
   if (isLoading) return <Loading />;
   if (isSuccess) {
     navigate("/dashboard");
+    window.location.reload();
   }
   if (isError) {
     localStorage.removeItem("token");
