@@ -357,10 +357,16 @@ const LyricCard = ({
                   <Textarea
                     value={lyricsBody}
                     onChange={(e) => setLyricsBody(e.target.value)}
+                    className={"overflow-hidden"}
+                    style={{
+                      minHeight: `${lyricsBody.split("\n").length * 20}px`,
+                    }}
                   />
                 </div>
               ) : (
+                // <div className="max-h-[1/2]">
                 <ReactMarkdown>{lyrics}</ReactMarkdown>
+                // </div>
               )}
             </div>
             <Separator />
