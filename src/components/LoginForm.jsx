@@ -31,7 +31,6 @@ const LoginForm = ({ setIsLoginForm }) => {
     mutationFn: login,
     onSuccess: (data) => {
       toast.success("Login successful!");
-      // console.log(data);
       localStorage.setItem("token", data.token);
       localStorage.setItem("refresh_token", data.refresh_token);
       navigate("/dashboard");
@@ -55,8 +54,8 @@ const LoginForm = ({ setIsLoginForm }) => {
   };
 
   return (
-    <Card className="p-6 h-full">
-      <CardTitle className="text-center text-2xl font-bold">
+    <Card className="w-full max-w-md p-6 sm:p-8 rounded-xl shadow-lg">
+      <CardTitle className="text-center text-2xl font-bold mb-4">
         Welcome Back!
       </CardTitle>
       <FormProvider {...form}>
@@ -72,9 +71,9 @@ const LoginForm = ({ setIsLoginForm }) => {
                 <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input
-                    className={"w-md"}
                     placeholder="user@email.com"
                     {...field}
+                    className="w-full"
                   />
                 </FormControl>
                 <FormDescription></FormDescription>
@@ -82,6 +81,7 @@ const LoginForm = ({ setIsLoginForm }) => {
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="password"
@@ -89,29 +89,40 @@ const LoginForm = ({ setIsLoginForm }) => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="password" {...field} />
+                  <Input
+                    type="password"
+                    placeholder="password"
+                    {...field}
+                    className="w-full"
+                  />
                 </FormControl>
                 <FormDescription></FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button className="-mt-2" variant="primary" type="submit">
+
+          <Button
+            className="-mt-2 w-full sm:w-auto"
+            variant="primary"
+            type="submit"
+          >
             Submit
           </Button>
         </form>
       </FormProvider>
-      <div className=" -mt-3 italic">
-        Don't have an account?{" "}
+
+      <div className="mt-4 text-center text-sm italic">
+        Don&apos;t have an account?{" "}
         <a
-          className="underline"
+          className="underline text-green-600 hover:text-green-700"
           href="#"
           onClick={(e) => {
             e.preventDefault();
             setIsLoginForm(false);
           }}
         >
-          Sign up for RhymeFlow
+          Sign up to RhymeFlow
         </a>
       </div>
     </Card>
