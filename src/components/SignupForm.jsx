@@ -59,8 +59,8 @@ const SignupForm = ({ setIsLoginForm }) => {
   };
 
   return (
-    <Card className="p-6 h-full">
-      <CardTitle className="text-center text-2xl font-bold">Register</CardTitle>
+    <Card className="w-full max-w-md p-6 sm:p-8 rounded-xl shadow-lg">
+      <CardTitle className="text-center text-2xl font-bold mb-4">Register</CardTitle>
       <FormProvider {...form}>
         <form
           className="flex flex-col gap-4"
@@ -74,7 +74,7 @@ const SignupForm = ({ setIsLoginForm }) => {
                 <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input
-                    className={"w-md"}
+                    className={"w-full"}
                     placeholder="user@email.com"
                     {...field}
                   />
@@ -91,7 +91,7 @@ const SignupForm = ({ setIsLoginForm }) => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="password" {...field} />
+                  <Input type="password" placeholder="password" {...field} className="w-full" />
                 </FormControl>
                 <FormDescription></FormDescription>
                 <FormMessage />
@@ -112,12 +112,12 @@ const SignupForm = ({ setIsLoginForm }) => {
               </FormItem>
             )}
           />
-          <Button className="-mt-2" variant="primary" type="submit">
+          <Button className="-mt-2 w-full sm:w-auto" variant="primary" type="submit">
             Submit
           </Button>
         </form>
         <a
-          className="underline -mt-3 italic"
+          className="underline text-green-600 hover:text-green-700"
           href="#"
           onClick={(e) => {
             e.preventDefault();
